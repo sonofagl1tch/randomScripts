@@ -6,6 +6,9 @@
 #Installing Apps with homebrew cask
 #############################################
 
+#set username
+username=`whoami`
+
 #create directory for iterm2 logs to go to
 mkdir "/Users/$username/Google Drive"
 mkdir "/Users/$username/Google Drive/terminalSessions"
