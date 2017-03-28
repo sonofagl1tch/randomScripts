@@ -18,6 +18,9 @@ fi
 #confirm homebrew installed correctly
 brew doctor
 
+#configure shell
+username=`whoami`
+
 #####################Update core unix tools################
 #The next thing you should do is update the unix tools you already have on
 #your mac.
@@ -83,21 +86,20 @@ apps=(
   atom
   cyberduck
   disk-arbitrator
-  flowdock
+  filezilla
   flux
   gimp
   google-chrome
   google-drive
-  google-hangouts
   iterm2
   keka
   security-growler
+  slack
   spectacle
   spotify
   unetbootin
   vlc
-  vmware-fusion
-  vmware-horizon-client
+  virtualbox
   wireshark --with-qt
 )
 
@@ -116,17 +118,23 @@ apm install sync-settings
 
 #dependancies package for atom-beautify that gets installed with my sync-settings
 #https://atom.io/packages/atom-beautify
-pip install autopep8
+#pip install autopep8
 
 #download patched font and move it to fonts folder
-wget https://github.com/powerline/fonts/raw/master/Meslo/Meslo%20LG%20M%20DZ%20Regular%20for%20Powerline.otf
-mv "Meslo LG M DZ Regular for Powerline.otf" ~/Library/Fonts/.
+cd /Users/$username/Downloads
+# clone
+git clone https://github.com/powerline/fonts.git
+# install
+cd fonts
+./install.sh
+# clean-up a bit
+cd ..
+rm -rf fonts
 
 #install
 #https://github.com/robbyrussell/oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-#configure shell
-username=`whoami`
+
 
 #configure iterm2
 . ./configure_iterm2.sh
