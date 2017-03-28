@@ -93,6 +93,7 @@ apps=(
   google-drive
   iterm2
   keka
+  pycharm-ce
   security-growler
   slack
   spectacle
