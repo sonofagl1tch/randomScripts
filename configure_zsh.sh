@@ -7,6 +7,8 @@
 #############################################
 
 
+#set username
+username=`whoami`
 
 /bin/cat << EOM >  ~/.zshrc
 # Path to your oh-my-zsh installation.
@@ -53,7 +55,7 @@ ZSH_THEME="agnoster"
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # HIST_STAMPS="mm/dd/yyyy"
 
-# Would you like to use another custom folder than $ZSH/custom?
+# Would you like to use another custom folder than \$ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
@@ -66,10 +68,10 @@ plugins=(git git-extras brew docker pip python )
 
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 # export MANPATH="/usr/local/man:$MANPATH"
-source $ZSH/oh-my-zsh.sh
+source \$ZSH/oh-my-zsh.sh
 
 #remove user@host prefix unless I am in an ssh session
-[[ -n "$SSH_CLIENT" ]] || export DEFAULT_USER="$username"
+[[ -n "\$SSH_CLIENT" ]] || export DEFAULT_USER="$username"
 
 
 # You may need to manually set your language environment
@@ -104,12 +106,12 @@ export HISTFILESIZE=100000               # big big history
 export HISTTIMEFORMAT="%m/%d/%y %T "     # Add timestamp
 setopt APPEND_HISTORY                 # append to history, don't overwrite it
 # After each command, append to the history file and reread it
-export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+export PROMPT_COMMAND="history -a; history -c; history -r; \$PROMPT_COMMAND"
 
 #aliases by $username
 #alias ls='ls --color=auto -lha'
 export PATH="/usr/local/sbin:$PATH"
 
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+alias gua='find ~/github/ -type d -depth 2 -exec git --git-dir={}/.git --work-tree={} pull \;'
 
 EOM
