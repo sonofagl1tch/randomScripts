@@ -91,6 +91,7 @@ apps=(
   gimp
   google-chrome
   google-drive
+  graphviz --with-gts
   iterm2
   keka
   pycharm-ce
