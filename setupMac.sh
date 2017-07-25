@@ -92,8 +92,11 @@ apps=(
   google-chrome
   google-drive
   graphviz --with-gts
+  grammarly
   iterm2
   keka
+  muzzle
+  private-internet-access
   pycharm-ce
   security-growler
   slack
