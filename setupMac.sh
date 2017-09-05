@@ -62,6 +62,7 @@ binaries=(
   unrar
   watch
   cask
+  autossh
   hh
   awscli
   coreutils
