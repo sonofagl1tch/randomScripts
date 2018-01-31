@@ -85,22 +85,19 @@ brew install cask
 apps=(
   appcleaner
   atom
+  Colloquy
   cyberduck
   disk-arbitrator
   filezilla
   flux
   gimp
   google-chrome
-  google-drive
-  graphviz --with-gts
   grammarly
   iterm2
   keka
-  muzzle
   private-internet-access
   pycharm-ce
-  security-growler
-  slack
+  quip
   spectacle
   spotify
   unetbootin
@@ -108,6 +105,13 @@ apps=(
   virtualbox
   wireshark --with-qt
 )
+#unused apps
+#google-drive
+#graphviz --with-gts
+#muzzle
+#security-growler
+#slack
+
 
 # Install apps to /Applications
 # Default is: /Users/$user/Applications
@@ -116,10 +120,10 @@ brew cask install --appdir="/Applications" ${apps[@]}
 
 #If you want to install beta versions of things like Chrome Canary or
 #Sublime Text 3, you'll need to tap the versions cask:
-brew tap caskroom/versions
+#brew tap caskroom/versions
 
 #atom packages
-https://atom.io/packages/sync-settings
+#https://atom.io/packages/sync-settings
 apm install sync-settings
 
 #dependancies package for atom-beautify that gets installed with my sync-settings
@@ -140,7 +144,6 @@ rm -rf fonts
 #install
 #https://github.com/robbyrussell/oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-
 
 #configure iterm2
 . ./configure_iterm2.sh
