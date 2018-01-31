@@ -62,7 +62,7 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-extras brew docker pip python )
+plugins=(aws osx ssh-agent git git-extras brew docker pip python )
 
 # User configuration
 
@@ -113,5 +113,10 @@ export PROMPT_COMMAND="history -a; history -c; history -r; \$PROMPT_COMMAND"
 export PATH="/usr/local/sbin:$PATH"
 
 alias gua='find ~/github/ -type d -depth 2 -exec git --git-dir={}/.git --work-tree={} pull \;'
+alias python='python3'
+alias wtf='dmesg'
+alias onoz='cat /var/log/errors.log'
+alias rtfm='man'
+alias duh='du -hd1'
 
 EOM
