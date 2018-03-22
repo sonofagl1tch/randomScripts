@@ -21,6 +21,10 @@ brew doctor
 #configure shell
 username=`whoami`
 
+#####################change location of screenshots from desktop to downloads################
+defaults write com.apple.screencapture location /Users/$username/Downloads
+killall SystemUIServer
+
 #####################Update core unix tools################
 #The next thing you should do is update the unix tools you already have on
 #your mac.
