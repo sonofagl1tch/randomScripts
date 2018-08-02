@@ -89,9 +89,11 @@ brew install cask
 apps=(
   appcleaner
   atom
-  Colloquy
+  amazon-chime
+  amazon-workdocs
   cyberduck
-  disk-arbitrator
+  docker
+  drawio
   filezilla
   flux
   gimp
@@ -99,22 +101,29 @@ apps=(
   grammarly
   iterm2
   keka
+  password-gorilla
+  postman
   private-internet-access
   pycharm-ce
   quip
+  royal-tsx
+  slack
   spectacle
   spotify
   unetbootin
   vlc
   virtualbox
+  visual-studio-code
   wireshark --with-qt
+  whatsapp
+  pallotron-yubiswitch
 )
 #unused apps
 #google-drive
 #graphviz --with-gts
 #muzzle
 #security-growler
-#slack
+#disk-arbitrator
 
 
 # Install apps to /Applications
