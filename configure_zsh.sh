@@ -65,5 +65,6 @@ alias rtfm='man'
 alias duh='du -hd1'
 alias zsh-update='upgrade_oh_my_zsh'
 alias grep='ggrep'
+alias vim='nvim'
 
 EOM
