@@ -101,6 +101,7 @@ apps=(
   grammarly
   iterm2
   keka
+  mobile-shell
   neovim
   password-gorilla
   postman
