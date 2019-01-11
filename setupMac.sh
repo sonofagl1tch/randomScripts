@@ -101,6 +101,7 @@ apps=(
   grammarly
   iterm2
   keka
+  neovim
   password-gorilla
   postman
   private-internet-access
@@ -110,6 +111,7 @@ apps=(
   slack
   spectacle
   spotify
+  tmux
   unetbootin
   vlc
   virtualbox
