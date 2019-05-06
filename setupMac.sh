@@ -33,44 +33,33 @@ killall SystemUIServer
 # Update homebrew recipes
 brew update
 
-# Install GNU core utilities (those that come with OS X are outdated)
-brew install coreutils
-
-# Install GNU `find`, `locate`, `updatedb`, and `xargs`, g-prefixed
-brew install findutils
-
-# Install Bash 4
-brew install bash
-
-# Install more recent versions of some OS X tools
-brew tap homebrew/dupes
-brew install homebrew/dupes/grep
-
-#You'll also need to update the $PATH in your ~/.bash_profile in order to use
-#these tools over their Mac counterparts:
-$PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
-
 #This establishes a solid foundation for your Mac. You can also install other
 #tools with Homebrew to improve your workflow. Here's what I install:
 binaries=(
-  python
-  wget --with-default-names
+  autossh
+  awscli
+  bash
+  bash-completion
+  cask
+  colordiff
+  coreutils
+  ffmpeg
+  findutils
+  git
+  git-crypt
+  gnu-sed --with-default-names
+  hh
   homebrew/dupes/grep --with-default-names
   htop
-  git
+  neovim
+  netcat
   nmap
-  bash-completion
-  git-crypt
-  ffmpeg
-  colordiff
+  python3
+  tmux
   unrar
   watch
-  cask
-  autossh
-  hh
-  awscli
-  coreutils
-  gnu-sed --with-default-names
+  wget --with-default-names
+  zsh-syntax-highlighting
 )
 echo "installing binaries..."
 brew install ${binaries[@]}
@@ -82,44 +71,37 @@ brew cleanup
 #Homebrew Cask is an extension for Homebrew that allows you to automate the
 #installation of Mac Apps and Fonts.
 #After you have homebrew installed, you'll want to install Homebrew Cask:
-brew install cask
+#brew install cask
 
 #Everyone's choice of apps will be different, but here is the script I use to install my favorite apps:
 # Apps
 apps=(
   appcleaner
-  atom
-  amazon-chime
-  amazon-workdocs
   cyberduck
   docker
   drawio
   filezilla
   flux
   gimp
+  github-desktop
   google-chrome
-  grammarly
   iterm2
+  jupyter
+  jupyter-notebook-ql
   keka
   mobile-shell
-  neovim
   password-gorilla
   postman
   private-internet-access
   pycharm-ce
-  quip
   royal-tsx
   slack
   spectacle
   spotify
-  tmux
-  unetbootin
   vlc
   virtualbox
   visual-studio-code
   wireshark --with-qt
-  whatsapp
-  pallotron-yubiswitch
 )
 #unused apps
 #google-drive
@@ -127,6 +109,8 @@ apps=(
 #muzzle
 #security-growler
 #disk-arbitrator
+#pallotron-yubiswitch
+#quip
 
 
 # Install apps to /Applications
@@ -134,38 +118,102 @@ apps=(
 echo "installing apps..."
 brew cask install --appdir="/Applications" ${apps[@]}
 
-#If you want to install beta versions of things like Chrome Canary or
-#Sublime Text 3, you'll need to tap the versions cask:
-#brew tap caskroom/versions
+#After you're done, you should clean everything up with:
+brew cleanup
 
-#atom packages
-#https://atom.io/packages/sync-settings
-apm install sync-settings
+#You'll also need to update the $PATH in your ~/.bash_profile in order to use
+#these tools over their Mac counterparts:
+$PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
 
-#dependancies package for atom-beautify that gets installed with my sync-settings
-#https://atom.io/packages/atom-beautify
-#pip install autopep8
-
-#download patched font and move it to fonts folder
-cd /Users/$username/Downloads
-# clone
-git clone https://github.com/powerline/fonts.git
-# install
-cd fonts
-./install.sh
-# clean-up a bit
-cd ..
-rm -rf fonts
+# #download patched font and move it to fonts folder
+# cd /Users/$username/Downloads
+# # clone
+# git clone https://github.com/powerline/fonts.git
+# # install
+# cd fonts
+# ./install.sh
+# # clean-up a bit
+# cd ..
+# rm -rf fonts
 
 #install
 #https://github.com/robbyrussell/oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 #configure iterm2
-. ./configure_iterm2.sh
+#. ./configure_iterm2.sh
+mkdir /Users/$username/Downloads/terminalSessions
+#manually setup session logging
+
 
 #configure zshrc
-. ./configure_zsh.sh
+/bin/cat << EOM >  ~/.zshrc
+# Path to your oh-my-zsh installation.
+export ZSH=/Users/$username/.oh-my-zsh
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/$username/Library/Python/2.7/bin"
+export MONO_GAC_PREFIX="/usr/local"
+
+# Set name of the theme to load.
+# Look in ~/.oh-my-zsh/themes/
+# Optionally, if you set this to "random", it'll load a random theme each
+# time that oh-my-zsh is loaded.
+#ZSH_THEME="agnoster"
+ZSH_THEME="robbyrussell"
+
+# Uncomment the following line to change how often to auto-update (in days).
+export UPDATE_ZSH_DAYS=2
+
+# Uncomment the following line to enable command auto-correction.
+ENABLE_CORRECTION="true"
+
+# Uncomment the following line to display red dots whilst waiting for completion.
+COMPLETION_WAITING_DOTS="true"
+
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(git aws osx ssh-agent brew docker zsh-syntax-highlighting)
+
+# User configuration
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+# export MANPATH="/usr/local/man:$MANPATH"
+source \$ZSH/oh-my-zsh.sh
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+#remove user@host prefix unless I am in an ssh session
+[[ -n "\$SSH_CLIENT" ]] || export DEFAULT_USER="$username"
+
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# ssh
+# ssh-add ~/.ssh/id_rsa_keyName
+
+#aliases by $username
+#alias ls='ls --color=auto -lha'
+export PATH="/usr/local/sbin:$PATH"
+
+alias gua='find ~/git/ -type d -depth 2 -exec git --git-dir={}/.git --work-tree={} pull \;'
+alias gitstat='find ~/git/ -type d -name '.git' | while read dir ; do sh -c "cd $dir/../ && echo -e \"\nGIT STATUS IN ${dir//\.git/}\" && git status -s" ; done'
+alias python='python3'
+alias wtf='dmesg'
+alias onoz='cat /var/log/errors.log'
+alias rtfm='man'
+alias duh='du -hd1'
+alias zsh-update='upgrade_oh_my_zsh'
+alias grep='ggrep'
+alias vim='nvim'
+alias config='nvim ~/.ssh/config'
+alias known='nvim ~/.ssh/known_hosts'
+
+EOM
 
 
 #compelted
