@@ -21,8 +21,11 @@ brew doctor
 #configure shell
 username=`whoami`
 
-#####################change location of screenshots from desktop to downloads################
+#####################change location of screenshots from desktop to downloads and compress screenshot################
+#move location of screenshots to downloads from desktop
 defaults write com.apple.screencapture location /Users/$username/Downloads
+#Achieves 90% compression just over change of format from png to jpg without visually deteriorating the quality of the capture.
+defaults write com.apple.screencapture type jpg
 killall SystemUIServer
 
 #####################Update core unix tools################
