@@ -1,6 +1,6 @@
 #!/bin/bash
 # Author Ryan Nolette
-# Date Modified 06/26/2016
+# Date Modified 06/08/2020
 #This script is used to configure a fresh mac install to ready to use state
 #Installing Binaries with homebrew
 #Installing Apps with homebrew cask
@@ -79,41 +79,57 @@ brew cleanup
 #Everyone's choice of apps will be different, but here is the script I use to install my favorite apps:
 # Apps
 apps=(
+  android-messages
   appcleaner
+  burp-suite
   cyberduck
   docker
+  docker-compose
   drawio
   filezilla
+  firefox
   flux
   gimp
   github-desktop
+  google-backup-and-sync
   google-chrome
+  grammarly
   iterm2
   jupyter
   jupyter-notebook-ql
   keka
+  little-snitch
+  menumeters
   mobile-shell
   password-gorilla
+  pock
   postman
   private-internet-access
   pycharm-ce
   royal-tsx
+  signal
   slack
+  sound-control
+  sourcetree
   spectacle
   spotify
+  steam
+  tenor
+  tor-browser
   vlc
   virtualbox
   visual-studio-code
   wireshark --with-qt
+  zenmap
+  zoom
 )
 #unused apps
-#google-drive
 #graphviz --with-gts
 #muzzle
 #security-growler
 #disk-arbitrator
 #pallotron-yubiswitch
-#quip
+#clocker
 
 
 # Install apps to /Applications
@@ -155,6 +171,8 @@ mkdir /Users/$username/Downloads/terminalSessions
 export ZSH=/Users/$username/.oh-my-zsh
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/$username/Library/Python/2.7/bin"
 export MONO_GAC_PREFIX="/usr/local"
+export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
+export GOPATH=$HOME/go
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -203,18 +221,40 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 #alias ls='ls --color=auto -lha'
 export PATH="/usr/local/sbin:$PATH"
 
-alias gua='find ~/git/ -type d -depth 2 -exec git --git-dir={}/.git --work-tree={} pull \;'
-alias gitstat='find ~/git/ -type d -name '.git' | while read dir ; do sh -c "cd $dir/../ && echo -e \"\nGIT STATUS IN ${dir//\.git/}\" && git status -s" ; done'
-alias python='python3'
+#aliases by ryan
+#alias ls='ls --color=auto -lha'
+#export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+alias gua='find "/Users/$username/Google Drive/git" -type d -depth 2 -exec git --git-dir={}/.git --work-tree={} pull \;'
+alias gitstat='find "/Users/$username/Google Drive/git" -type d -name '.git' | while read dir ; do sh -c "cd $dir/../ && echo -e \"\nGIT STATUS IN ${dir//\.git}\" && git status -s" ; done'
 alias wtf='dmesg'
 alias onoz='cat /var/log/errors.log'
 alias rtfm='man'
 alias duh='du -hd1'
 alias zsh-update='upgrade_oh_my_zsh'
-alias grep='ggrep'
 alias vim='nvim'
 alias config='nvim ~/.ssh/config'
 alias known='nvim ~/.ssh/known_hosts'
+alias creds='nvim ~/.aws/credentials'
+alias fixjamf='sudo jamf flushpolicyhistory && sudo jamf recon && sudo jamf policy'
+alias please='sudo $(fc -ln -1)'
+alias randoUser='openssl rand -base64 20 | tr -dc A-Za-z0-9 | head -c 13 ; echo '''
+alias ippublic='dig +short myip.opendns.com @resolver1.opendns.com'
+alias kali='docker run -t -i kalilinux/kali-linux-docker /bin/bash'
+alias owasp='docker run -t -i owasp/zap2docker-stable /bin/bash'
+alias parrot='docker run -t -i parrotsec/parrot-core /bin/bash'
+#alias victimWebServer='docker run -t -i 5e35e350aded /bin/bash'
+alias victimWebServer='docker run -t -i -p 80:80 -p 22:22 --network=bridge centos /bin/bash'
+#exports
+export MONO_GAC_PREFIX="/usr/local"
+export BYOBU_PREFIX=/usr/local
+#export http_proxy='http://127.0.0.1:8080'
+#export https_proxy='https://127.0.0.1:8080'
+source ~/.iterm2_shell_integration.zsh
+
+#brew services
+brew services start tor
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true
 
 EOM
 
