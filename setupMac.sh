@@ -3,7 +3,6 @@
 # Date Modified 06/08/2020
 #This script is used to configure a fresh mac install to ready to use state
 #Installing Binaries with homebrew
-#Installing Apps with homebrew cask
 #############################################
 #start of script timestamp
 start=`date +%s`
@@ -25,43 +24,93 @@ username=`whoami`
 #move location of screenshots to downloads from desktop
 defaults write com.apple.screencapture location /Users/$username/Downloads
 #Achieves 90% compression just over change of format from png to jpg without visually deteriorating the quality of the capture.
-defaults write com.apple.screencapture type jpg
-killall SystemUIServer
+# defaults write com.apple.screencapture type jpg
+# killall SystemUIServer
 
-#####################Update core unix tools################
-#The next thing you should do is update the unix tools you already have on
-#your mac.
-
-# update these unix tools:
+#####################Update homebrew################
 # Update homebrew recipes
 brew update
 
 #This establishes a solid foundation for your Mac. You can also install other
 #tools with Homebrew to improve your workflow. Here's what I install:
 binaries=(
+  android-messages
+  appcleaner
+  authy
   autossh
   awscli
-  bash
+  balenaetcher
   bash-completion
-  cask
+  burp-suite
   colordiff
-  coreutils
-  ffmpeg
-  findutils
+  cyberduck
+  disk-inventory-x
+  homebrew/cask/docker
+  docker-compose
+  drawio
+  firefox
+  gimp
   git
-  git-crypt
-  gnu-sed --with-default-names
-  hh
-  homebrew/dupes/grep --with-default-names
+  google-backup-and-sync
+  google-chrome
+  grammarly
+  graphviz
+  homebrew/cask-fonts/font-hack-nerd-font
+  hping
   htop
+  htop
+  iterm2
+  jupyter
+  jupyter-notebook-ql
+  keka
+  little-snitch
+  menumeters
+  mobile-shell
+  mosh
   neovim
   netcat
+  netcat
+  nikto
   nmap
-  python3
+  notion
+  pigz
+  homebrew/cask/platypus
+  postman
+  private-internet-access
+  proxychains-ng
+  pycharm-ce
+  rectangle
+  royal-tsx
+  session-manager-plugin
+  signal
+  slack
+  homebrew/cask/snappy
+  socat
+  sound-control
+  spotify
+  steam
+  suspicious-package
+  telnet
+  tenor
+  terraform
+  terraform-inventory
   tmux
-  unrar
+  tor
+  tor-browser
+  torsocks
+  unbound
+  virtualbox
+  virtualbox-extension-pack
+  visual-studio-code
+  vlc
+  vnc-viewer
   watch
-  wget --with-default-names
+  wget
+  homebrew/cask/wireshark
+  x2goclient
+  xquartz
+  zenmap
+  zoom
   zsh-syntax-highlighting
 )
 echo "installing binaries..."
@@ -70,162 +119,28 @@ brew install ${binaries[@]}
 #After you're done, you should clean everything up with:
 brew cleanup
 
-############Installing Apps with Homebrew Cask#################
-#Homebrew Cask is an extension for Homebrew that allows you to automate the
-#installation of Mac Apps and Fonts.
-#After you have homebrew installed, you'll want to install Homebrew Cask:
-#brew install cask
-
-#Everyone's choice of apps will be different, but here is the script I use to install my favorite apps:
-# Apps
-apps=(
-  android-messages
-  appcleaner
-  burp-suite
-  cyberduck
-  docker
-  docker-compose
-  drawio
-  filezilla
-  firefox
-  flux
-  gimp
-  github-desktop
-  google-backup-and-sync
-  google-chrome
-  grammarly
-  iterm2
-  jupyter
-  jupyter-notebook-ql
-  keka
-  little-snitch
-  menumeters
-  mobile-shell
-  password-gorilla
-  pock
-  postman
-  private-internet-access
-  pycharm-ce
-  royal-tsx
-  signal
-  slack
-  sound-control
-  sourcetree
-  spectacle
-  spotify
-  steam
-  tenor
-  tor-browser
-  vlc
-  virtualbox
-  visual-studio-code
-  wireshark --with-qt
-  zenmap
-  zoom
-)
-#unused apps
-#graphviz --with-gts
-#muzzle
-#security-growler
-#disk-arbitrator
-#pallotron-yubiswitch
-#clocker
-
-
-# Install apps to /Applications
-# Default is: /Users/$user/Applications
-echo "installing apps..."
-brew cask install --appdir="/Applications" ${apps[@]}
-
-#After you're done, you should clean everything up with:
-brew cleanup
-
-#You'll also need to update the $PATH in your ~/.bash_profile in order to use
-#these tools over their Mac counterparts:
-$PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
-
-# #download patched font and move it to fonts folder
-# cd /Users/$username/Downloads
-# # clone
-# git clone https://github.com/powerline/fonts.git
-# # install
-# cd fonts
-# ./install.sh
-# # clean-up a bit
-# cd ..
-# rm -rf fonts
-
-#install
+#install zsh
 #https://github.com/robbyrussell/oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
-#configure iterm2
-#. ./configure_iterm2.sh
-mkdir /Users/$username/Downloads/terminalSessions
-#manually setup session logging
-
+#install zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+#install zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 
 #configure zshrc
 /bin/cat << EOM >  ~/.zshrc
-# Path to your oh-my-zsh installation.
-export ZSH=/Users/$username/.oh-my-zsh
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/$username/Library/Python/2.7/bin"
-export MONO_GAC_PREFIX="/usr/local"
-export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
-export GOPATH=$HOME/go
-
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-#ZSH_THEME="agnoster"
+export ZSH="/Users/master/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
-
-# Uncomment the following line to change how often to auto-update (in days).
-export UPDATE_ZSH_DAYS=2
-
-# Uncomment the following line to enable command auto-correction.
 ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git aws osx ssh-agent brew docker zsh-syntax-highlighting)
-
-# User configuration
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-# export MANPATH="/usr/local/man:$MANPATH"
-source \$ZSH/oh-my-zsh.sh
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-#remove user@host prefix unless I am in an ssh session
-[[ -n "\$SSH_CLIENT" ]] || export DEFAULT_USER="$username"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# ssh
-# ssh-add ~/.ssh/id_rsa_keyName
-
-#aliases by $username
-#alias ls='ls --color=auto -lha'
-export PATH="/usr/local/sbin:$PATH"
-
-#aliases by ryan
-#alias ls='ls --color=auto -lha'
-#export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+HIST_STAMPS="yyyy-mm-dd"
+plugins=(git aws osx ssh-agent brew docker zsh-autosuggestions zsh-syntax-highlighting)
+source $ZSH/oh-my-zsh.sh
+source /Users/master/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+source /Users/master/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
 alias gua='find "/Users/$username/Google Drive/git" -type d -depth 2 -exec git --git-dir={}/.git --work-tree={} pull \;'
-alias gitstat='find "/Users/$username/Google Drive/git" -type d -name '.git' | while read dir ; do sh -c "cd $dir/../ && echo -e \"\nGIT STATUS IN ${dir//\.git}\" && git status -s" ; done'
+alias gitstat='find "/Users/$username/git" -type d -name '.git' | while read dir ; do sh -c "cd $dir/../ && echo -e \"\nGIT STATUS IN ${dir//\.git}\" && git status -s" ; done'
 alias wtf='dmesg'
 alias onoz='cat /var/log/errors.log'
 alias rtfm='man'
@@ -239,23 +154,7 @@ alias fixjamf='sudo jamf flushpolicyhistory && sudo jamf recon && sudo jamf poli
 alias please='sudo $(fc -ln -1)'
 alias randoUser='openssl rand -base64 20 | tr -dc A-Za-z0-9 | head -c 13 ; echo '''
 alias ippublic='dig +short myip.opendns.com @resolver1.opendns.com'
-alias kali='docker run -t -i kalilinux/kali-linux-docker /bin/bash'
-alias owasp='docker run -t -i owasp/zap2docker-stable /bin/bash'
-alias parrot='docker run -t -i parrotsec/parrot-core /bin/bash'
-#alias victimWebServer='docker run -t -i 5e35e350aded /bin/bash'
-alias victimWebServer='docker run -t -i -p 80:80 -p 22:22 --network=bridge centos /bin/bash'
-#exports
-export MONO_GAC_PREFIX="/usr/local"
-export BYOBU_PREFIX=/usr/local
-#export http_proxy='http://127.0.0.1:8080'
-#export https_proxy='https://127.0.0.1:8080'
-source ~/.iterm2_shell_integration.zsh
-
-#brew services
-brew services start tor
-
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true
-
+alias cdgit='cd /Users/$username/git'
 EOM
 
 
