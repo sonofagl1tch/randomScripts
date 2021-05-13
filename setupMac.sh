@@ -124,21 +124,23 @@ brew cleanup
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 #install zsh-syntax-highlighting
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git /Users/master/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 #install zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-autosuggestions /Users/master/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 
 #configure zshrc
-/bin/cat << EOM >  ~/.zshrc
-export ZSH="/Users/master/.oh-my-zsh"
+/bin/cat << EOM >  /Users/master/.zshrc
+export ZSH="/Users/$username/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
 ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 HIST_STAMPS="yyyy-mm-dd"
 plugins=(git aws osx ssh-agent brew docker zsh-autosuggestions zsh-syntax-highlighting)
+zstyle :omz:plugins:ssh-agent agent-forwarding on
+zstyle :omz:plugins:ssh-agent identities github_sonofagl1tch
 source $ZSH/oh-my-zsh.sh
-source /Users/master/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
-source /Users/master/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+source /Users/$username/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+source /Users/$username/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
 alias gua='find "/Users/$username/Google Drive/git" -type d -depth 2 -exec git --git-dir={}/.git --work-tree={} pull \;'
 alias gitstat='find "/Users/$username/git" -type d -name '.git' | while read dir ; do sh -c "cd $dir/../ && echo -e \"\nGIT STATUS IN ${dir//\.git}\" && git status -s" ; done'
 alias wtf='dmesg'
@@ -147,9 +149,9 @@ alias rtfm='man'
 alias duh='du -hd1'
 alias zsh-update='upgrade_oh_my_zsh'
 alias vim='nvim'
-alias config='nvim ~/.ssh/config'
-alias known='nvim ~/.ssh/known_hosts'
-alias creds='nvim ~/.aws/credentials'
+alias config='nvim /Users/master/.ssh/config'
+alias known='nvim /Users/master/.ssh/known_hosts'
+alias creds='nvim /Users/master/.aws/credentials'
 alias fixjamf='sudo jamf flushpolicyhistory && sudo jamf recon && sudo jamf policy'
 alias please='sudo $(fc -ln -1)'
 alias randoUser='openssl rand -base64 20 | tr -dc A-Za-z0-9 | head -c 13 ; echo '''
