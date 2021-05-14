@@ -98,6 +98,7 @@ binaries=(
   tor
   tor-browser
   torsocks
+  homebrew/cask/transmission
   unbound
   virtualbox
   virtualbox-extension-pack
