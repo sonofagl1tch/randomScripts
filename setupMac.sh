@@ -34,7 +34,7 @@ brew update
 #This establishes a solid foundation for your Mac. You can also install other
 #tools with Homebrew to improve your workflow. Here's what I install:
 binaries=(
-  android-messages
+  amazon-workdocs-drive
   appcleaner
   authy
   autossh
@@ -48,47 +48,35 @@ binaries=(
   homebrew/cask/docker
   docker-compose
   drawio
-  firefox
   gimp
   git
-  google-backup-and-sync
-  google-chrome
-  grammarly
   graphviz
   homebrew/cask-fonts/font-hack-nerd-font
   hping
   htop
-  htop
   iterm2
-  jupyter
-  jupyter-notebook-ql
   keka
+  keybase
   little-snitch
-  menumeters
+  maccy
   mobile-shell
   mosh
   neovim
   netcat
-  netcat
   nikto
   nmap
-  notion
   pigz
-  homebrew/cask/platypus
   postman
-  private-internet-access
   proxychains-ng
   pycharm-ce
+  quip
   rectangle
   royal-tsx
   session-manager-plugin
   signal
-  slack
-  homebrew/cask/snappy
   socat
-  sound-control
   spotify
-  steam
+  stats
   suspicious-package
   telnet
   tenor
@@ -99,9 +87,7 @@ binaries=(
   tor-browser
   torsocks
   homebrew/cask/transmission
-  unbound
-  virtualbox
-  virtualbox-extension-pack
+  Vsee
   visual-studio-code
   vlc
   vnc-viewer
@@ -124,9 +110,9 @@ brew cleanup
 #https://github.com/robbyrussell/oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
-#install zsh-syntax-highlighting
+# #install zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git /Users/master/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
-#install zsh-autosuggestions
+# #install zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-autosuggestions /Users/master/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 
 #configure zshrc
