@@ -12,7 +12,7 @@ start=`date +%s`
 # Install if we don't have it
 if test ! $(which brew); then
   echo "Installing homebrew..."
-  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/$username/install)"
 fi
 #confirm homebrew installed correctly
 brew doctor
@@ -51,6 +51,7 @@ binaries=(
   homebrew/cask/docker
   docker-compose
   drawio
+  firefox
   gimp
   git
   graphviz
@@ -77,6 +78,7 @@ binaries=(
   royal-tsx
   session-manager-plugin
   signal
+  slack
   socat
   spotify
   stats
@@ -111,21 +113,21 @@ brew cleanup
 
 #install zsh
 #https://github.com/robbyrussell/oh-my-zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/$username/tools/install.sh)"
 
 # #install zsh-syntax-highlighting
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git /Users/master/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git /Users/$username/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 # #install zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-autosuggestions /Users/master/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-autosuggestions /Users/$username/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 
 #configure zshrc
-/bin/cat << EOM >  /Users/master/.zshrc
+/bin/cat << EOM >  /Users/$username/.zshrc
 export ZSH="/Users/$username/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
 ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 HIST_STAMPS="yyyy-mm-dd"
-plugins=(git aws osx ssh-agent brew docker zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git aws macos ssh-agent brew docker zsh-autosuggestions zsh-syntax-highlighting)
 zstyle :omz:plugins:ssh-agent agent-forwarding on
 zstyle :omz:plugins:ssh-agent identities github_sonofagl1tch
 source $ZSH/oh-my-zsh.sh
@@ -139,14 +141,21 @@ alias rtfm='man'
 alias duh='du -hd1'
 alias zsh-update='upgrade_oh_my_zsh'
 alias vim='nvim'
-alias config='nvim /Users/master/.ssh/config'
-alias known='nvim /Users/master/.ssh/known_hosts'
-alias creds='nvim /Users/master/.aws/credentials'
+alias config='nvim /Users/$username/.ssh/config'
+alias known='nvim /Users/$username/.ssh/known_hosts'
+alias creds='nvim /Users/$username/.aws/credentials'
 alias fixjamf='sudo jamf flushpolicyhistory && sudo jamf recon && sudo jamf policy'
 alias please='sudo $(fc -ln -1)'
 alias randoUser='openssl rand -base64 20 | tr -dc A-Za-z0-9 | head -c 13 ; echo '''
 alias ippublic='dig +short myip.opendns.com @resolver1.opendns.com'
 alias cdgit='cd /Users/$username/git'
+alias ga='git add *'
+alias gm='git commit -m'
+alias gp='git push'
+alias gpl='git pull'
+alias gs='git status'
+alias gb='git branch'
+alias gch='git checkout'
 EOM
 
 
