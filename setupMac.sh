@@ -34,7 +34,10 @@ brew update
 #This establishes a solid foundation for your Mac. You can also install other
 #tools with Homebrew to improve your workflow. Here's what I install:
 binaries=(
+  amazon-workdocs
   amazon-workdocs-drive
+  amazon-chime
+  amazon-workspaces
   appcleaner
   authy
   autossh
