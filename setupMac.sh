@@ -12,7 +12,7 @@ start=`date +%s`
 # Install if we don't have it
 if test ! $(which brew); then
   echo "Installing homebrew..."
-  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/$username/install)"
+  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 #confirm homebrew installed correctly
 brew doctor
@@ -113,7 +113,7 @@ brew cleanup
 
 #install zsh
 #https://github.com/robbyrussell/oh-my-zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/$username/tools/install.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 # #install zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git /Users/$username/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
