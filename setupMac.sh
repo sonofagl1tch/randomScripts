@@ -34,44 +34,75 @@ brew update
 #This establishes a solid foundation for your Mac. You can also install other
 #tools with Homebrew to improve your workflow. Here's what I install:
 binaries=(
-  amazon-workdocs
-  amazon-workdocs-drive
-  amazon-chime
-  amazon-workspaces
-  appcleaner
-  authy
   autossh
   awscli
-  balenaetcher
   bash-completion
-  burp-suite
   colordiff
-  cyberduck
-  disk-inventory-x
-  homebrew/cask/docker
   docker-compose
-  drawio
-  firefox
-  gimp
   git
+  gnupg
+  gobject-introspection
   graphviz
-  homebrew/cask-fonts/font-hack-nerd-font
+  helm
   hping
   htop
-  iterm2
-  keka
-  keybase
-  little-snitch
-  maccy
-  mobile-shell
+  kubernetes-cli
+  luajit-openresty
   mosh
   neovim
   netcat
   nikto
   nmap
   pigz
-  postman
   proxychains-ng
+  pyenv
+  ruby
+  snyk/tap/snyk
+  socat
+  telnet
+  terraform
+  terraform-inventory
+  tmux
+  tor
+  torsocks
+  watch
+  wget
+  zsh-syntax-highlighting
+)
+echo "installing binaries..."
+brew install --force ${binaries[@]}
+
+# install brew casks
+# removed: sound-control
+caskApps=(
+  alfred4
+  amazon-workdocs
+  amazon-workdocs-drive
+  amazon-workspaces
+  amazon-chime
+  appcleaner
+  asana
+  authy
+  balenaetcher
+  burp-suite
+  cyberduck
+  discord
+  disk-inventory-x
+  docker
+  drawio
+  firefox
+  font-hack-nerd-font
+  gimp
+  gpg-suite
+  iterm2
+  keka
+  keybase
+  little-snitch
+  maccy
+  maltego
+  pallotron-yubiswitch
+  postman
+  prowritingaid
   pycharm-ce
   quip
   rectangle
@@ -79,34 +110,25 @@ binaries=(
   session-manager-plugin
   signal
   slack
-  socat
   spotify
   stats
   suspicious-package
-  telnet
+  temurin11
   tenor
-  terraform
-  terraform-inventory
-  tmux
-  tor
   tor-browser
-  torsocks
-  homebrew/cask/transmission
-  Vsee
+  transmission
   visual-studio-code
   vlc
   vnc-viewer
-  watch
-  wget
-  homebrew/cask/wireshark
+  vsee
+  wireshark
   x2goclient
   xquartz
   zenmap
   zoom
-  zsh-syntax-highlighting
 )
-echo "installing binaries..."
-brew install ${binaries[@]}
+echo "installing cask binaries..."
+brew install --force ${caskApps[@]}
 
 #After you're done, you should clean everything up with:
 brew cleanup
